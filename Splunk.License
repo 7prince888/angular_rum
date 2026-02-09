@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<license>
+ <signature>vLcYRIAdTLvFq3lNf6WpTAECSJM3j0OkXvINGqyuPhhVnuXT9Ja8nLxQ1Fihk/nFQo409jrEtP28AOudpzf0/2KRDJYb6j7Q37HX3LXj3y7anTjmEqAnaJKri8GNkD4v43BCngFAlodkOvr0eDht8RorxNEcqV0YcZpCnbyKJoYh3LtIjR7PSICTgg0xIySETzyG8JbN+7pgfokf2CB62VkSuMl1YYz7lZOq7k4/qpuW2RfqhkKTSKkIBWBrpBkwLq9KmDRzwnMVlZAMrRiYomoi37o7Go3NnVN35gK52rutDwJrbqTP98NloC0lKkguhGuZRfVZlhGkSOlfUbT5tg==</signature>
+ <payload>
+   <type>enterprise</type>
+   <group_id>Enterprise</group_id>
+   <quota>10737418240</quota>
+   <max_violations>5</max_violations>
+   <window_period>30</window_period>
+   <creation_time>1769932800</creation_time>
+   <label>Splunk Developer Personal License DO NOT DISTRIBUTE</label>
+   <expiration_time>1785567599</expiration_time>
+   <subgroup_id>DevLicense:prithiviraj.kx@aig.com</subgroup_id>
+   <features>
+     <feature>Auth</feature>
+     <feature>FwdData</feature>
+     <feature>RcvData</feature>
+     <feature>LocalSearch</feature>
+     <feature>DistSearch</feature>
+     <feature>RcvSearch</feature>
+     <feature>ScheduledSearch</feature>
+     <feature>Alerting</feature>
+     <feature>DeployClient</feature>
+     <feature>DeployServer</feature>
+     <feature>SplunkWeb</feature>
+     <feature>SigningProcessor</feature>
+     <feature>SyslogOutputProcessor</feature>
+     <feature>CanBeRemoteMaster</feature>
+   </features>
+   <add_ons>
+     <add_on name="itsi" type="app">
+       <parameter key="size" value="10"/>
+     </add_on>
+   </add_ons>
+   <sourcetypes/>
+   <guid>01E69DE3-3D07-4F4E-A1EE-F97504D6A4E6</guid>
+ </payload>
+</license>
