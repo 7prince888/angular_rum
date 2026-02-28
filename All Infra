@@ -32,3 +32,5 @@ Infrastructure
  10.1.1.192 jenkins
 
  10.1.1.125 splunk itsi
+
+ tar -xvf splunk_itsi_4211.spl /opt/splunk/etc/apps

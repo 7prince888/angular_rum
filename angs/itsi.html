@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITSI Implementation Gantt Chart</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .chart-container {
+            padding: 30px;
+            overflow-x: auto;
+        }
+
+        .gantt {
+            display: grid;
+            grid-template-columns: 250px repeat(16, 60px);
+            gap: 0;
+            min-width: 1200px;
+        }
+
+        .gantt-header {
+            display: contents;
+        }
+
+        .task-label {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            font-weight: 500;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+        }
+
+        .phase-label {
+            background: #e3f2fd;
+            font-weight: 600;
+            color: #1976d2;
+            border-left: 4px solid #1976d2;
+        }
+
+        .week-header {
+            padding: 12px 5px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            background: #37474f;
+            color: white;
+            border-right: 1px solid #546e7a;
+        }
+
+        .timeline-cell {
+            border-bottom: 1px solid #e0e0e0;
+            border-right: 1px solid #f0f0f0;
+            position: relative;
+            min-height: 44px;
+        }
+
+        .bar {
+            position: absolute;
+            height: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .phase-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .phase-2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .phase-3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .phase-4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .phase-5 { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+
+        .legend {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #e0e0e0;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .legend-color {
+            width: 30px;
+            height: 16px;
+            border-radius: 3px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ITSI Implementation Gantt Chart</h1>
+            <p class="subtitle">16-Week Deployment Timeline</p>
+        </div>
+
+        <div class="chart-container">
+            <div class="gantt" id="gantt"></div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color phase-1"></div>
+                <span>Planning & Design</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color phase-2"></div>
+                <span>Infrastructure Setup</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color phase-3"></div>
+                <span>Configuration</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color phase-4"></div>
+                <span>Testing & Validation</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color phase-5"></div>
+                <span>Deployment & Training</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tasks = [
+            { name: "PHASE 1: Planning & Design", isPhase: true },
+            { name: "Requirements Gathering", start: 1, duration: 2, phase: 1 },
+            { name: "Architecture Design", start: 2, duration: 2, phase: 1 },
+            { name: "Data Source Identification", start: 1, duration: 3, phase: 1 },
+            { name: "KPI Definition", start: 3, duration: 2, phase: 1 },
+            
+            { name: "PHASE 2: Infrastructure Setup", isPhase: true },
+            { name: "ITSI Installation", start: 4, duration: 1, phase: 2 },
+            { name: "Environment Configuration", start: 5, duration: 2, phase: 2 },
+            { name: "Data Integration Setup", start: 5, duration: 3, phase: 2 },
+            
+            { name: "PHASE 3: Configuration", isPhase: true },
+            { name: "Service Definition", start: 7, duration: 2, phase: 3 },
+            { name: "KPI Configuration", start: 8, duration: 2, phase: 3 },
+            { name: "Correlation Searches", start: 9, duration: 2, phase: 3 },
+            { name: "Glass Tables Design", start: 10, duration: 2, phase: 3 },
+            { name: "Notable Event Aggregation", start: 10, duration: 2, phase: 3 },
+            
+            { name: "PHASE 4: Testing & Validation", isPhase: true },
+            { name: "Unit Testing", start: 11, duration: 2, phase: 4 },
+            { name: "Integration Testing", start: 12, duration: 2, phase: 4 },
+            { name: "UAT", start: 13, duration: 2, phase: 4 },
+            
+            { name: "PHASE 5: Deployment & Training", isPhase: true },
+            { name: "Documentation", start: 14, duration: 2, phase: 5 },
+            { name: "User Training", start: 15, duration: 2, phase: 5 },
+            { name: "Production Deployment", start: 15, duration: 1, phase: 5 },
+            { name: "Go Live & Support", start: 16, duration: 1, phase: 5 }
+        ];
+
+        const gantt = document.getElementById('gantt');
+        
+        // Create headers
+        const headerDiv = document.createElement('div');
+        headerDiv.className = 'gantt-header';
+        
+        const taskHeaderCell = document.createElement('div');
+        taskHeaderCell.className = 'task-label';
+        taskHeaderCell.style.background = '#37474f';
+        taskHeaderCell.style.color = 'white';
+        taskHeaderCell.style.fontWeight = '600';
+        taskHeaderCell.textContent = 'Task / Phase';
+        headerDiv.appendChild(taskHeaderCell);
+        
+        for (let i = 1; i <= 16; i++) {
+            const weekCell = document.createElement('div');
+            weekCell.className = 'week-header';
+            weekCell.textContent = `W${i}`;
+            headerDiv.appendChild(weekCell);
+        }
+        
+        gantt.appendChild(headerDiv);
+        
+        // Create task rows
+        tasks.forEach(task => {
+            const labelCell = document.createElement('div');
+            labelCell.className = task.isPhase ? 'task-label phase-label' : 'task-label';
+            labelCell.textContent = task.name;
+            gantt.appendChild(labelCell);
+            
+            for (let week = 1; week <= 16; week++) {
+                const cell = document.createElement('div');
+                cell.className = 'timeline-cell';
+                
+                if (!task.isPhase && week === task.start) {
+                    const bar = document.createElement('div');
+                    bar.className = `bar phase-${task.phase}`;
+                    bar.style.width = `${task.duration * 60 - 4}px`;
+                    bar.style.left = '2px';
+                    cell.appendChild(bar);
+                }
+                
+                gantt.appendChild(cell);
+            }
+        });
+    </script>
+</body>
+</html>

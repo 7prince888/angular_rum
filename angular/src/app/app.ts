@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
 import { ItemsComponent } from './items.component';
 
 @Component({
   selector: 'app-root',
-  imports: [HttpClientModule, ItemsComponent],
+  imports: [ItemsComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

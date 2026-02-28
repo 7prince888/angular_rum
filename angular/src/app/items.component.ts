@@ -9,7 +9,7 @@ import { ItemsService } from './items.service';
   template: `
     <div>
       <h2>Items</h2>
-      <table *ngIf="items?.length; else noData" border="1" cellpadding="8">
+      <table *ngIf="items.length; else noData" border="1" cellpadding="8">
         <thead>
           <tr>
             <th *ngFor="let col of columns">{{ col }}</th>
