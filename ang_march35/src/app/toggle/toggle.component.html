@@ -1,0 +1,35 @@
+<p>toggle works!</p>
+
+
+
+
+<header class="app-header">
+      <span class="app-logo">MyApp</span>
+      <!-- Drop <app-toggle> anywhere — it works on every page -->
+      <app-toggle />
+    </header>
+
+    <main class="app-main">
+      <p>Toggle the switch in the header to enable or disable Splunk RUM monitoring globally.</p>
+    </main>
+  `,
+  styles: [`
+    .app-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      background: #0f172a;
+      border-bottom: 1px solid #1e293b;
+    }
+    .app-logo {
+      font-weight: 700;
+      font-size: 18px;
+      color: #f1f5f9;
+      font-family: 'Courier New', monospace;
+    }
+    .app-main {
+      padding: 32px 24px;
+      color: #94a3b8;
+      font-family: sans-serif;
+    }

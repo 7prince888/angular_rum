@@ -1,0 +1,69 @@
+<script src="https://cdn.signalfx.com/o11y-gdi-rum/<version>/splunk-otel-web-session-recorder.js" crossorigin="anonymous"></script>
+<script>
+SplunkSessionRecorder.init({
+  app: "my-web-app",
+  realm: "us1",
+  rumAccessToken: "QhwpaLHNQIBNg-F4ZgveFg"
+});
+</script>
+
+
+
+
+/*
+
+IMPORTANT: Replace the <version> placeholder in the src URL with a
+version from https://github.com/signalfx/splunk-otel-js-web/releases
+
+*/
+<script src="https://cdn.signalfx.com/o11y-gdi-rum/<version>/splunk-otel-web.js" crossorigin="anonymous"></script>
+<script>
+    SplunkRum.init({
+        realm: "us1",
+        rumAccessToken: "QhwpaLHNQIBNg-F4ZgveFg",
+        applicationName: "my-web-app",
+        deploymentEnvironment: "production"
+    });
+</script>
+
+
+splunk-rum sourcemaps inject --path <path-to-production-files>
+
+
+
+    Option 1: Use the splunk-rum CLI
+
+Set up your build environment:
+Verify that your production build tool is configured to generate source maps.
+Run the production build for your project.
+Verify that your production bundles and source maps were written to the same output directory.
+Find all source map/minified file pairs in the directory you specify, compute a source map ID for each pair, and inject that source map ID into each minified file as a code snippet:
+splunk-rum sourcemaps inject --path <path-to-production-files>
+
+Copy to Clipboard
+Upload the source maps in the directory you specify to Splunk RUM:
+splunk-rum sourcemaps upload \
+--app-name <appName> --app-version <appVersion> \
+--path <path-to-production-files>
+
+
+
+
+ <script src="https://cdn.signalfx.com/o11y-gdi-rum/v2.3.0/splunk-otel-web.js" integrity="sha384-IvIWluE2BNZr5w9/0lb0L+QLc9ko2NktAE8h0bJKqan6i0X9XlXGBFFJnozMjtWy" crossorigin="anonymous"></script>
+<script>
+    SplunkRum.init({
+        realm: "us1",
+        rumAccessToken: "KrKtSmfyU4JMde0WNkAnmw",
+        applicationName: "app2",
+        deploymentEnvironment: "prod"
+    });
+</script> 
+
+<script src="https://cdn.signalfx.com/o11y-gdi-rum/v2.3.0/splunk-otel-web-session-recorder.js" crossorigin="anonymous"></script>
+<script>
+SplunkSessionRecorder.init({
+  app: "app2",
+  realm: "us1",
+  rumAccessToken: "KrKtSmfyU4JMde0WNkAnmw-F4ZgveFg"
+});
+</script>
